@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Home, Search, TrendingUp, Wallet, Package, Star } from 'lucide-react';
 import Sidebar from '../shared/Sidebar';
 import Navbar from '../shared/Navbar';
 
 
 import CropBidding from './CropBidding';
+import MarketPredictor from '../farmer/MarketPredictor';
 
 const TraderDashboard = () => {
+  const [activeTab, setActiveTab] = useState('dashboard');
+  
   const sidebarItems = [
-    { icon: Home, label: 'Dashboard', active: true },
-    { icon: Search, label: 'Browse Crops', active: false },
-    { icon: TrendingUp, label: 'My Bids', active: false },
-    { icon: Wallet, label: 'Escrow', active: false },
-    { icon: Package, label: 'Delivery Confirm', active: false },
-    { icon: Star, label: 'Ratings', active: false },
+    { icon: Home, label: 'Dashboard', active: activeTab === 'dashboard', onClick: () => setActiveTab('dashboard') },
+    { icon: Search, label: 'Market Predictor', active: activeTab === 'market-predictor', onClick: () => setActiveTab('market-predictor') },
   ];
 
 
@@ -28,9 +27,14 @@ const TraderDashboard = () => {
         <Navbar />
         
         <main className="p-8">
-          <div className="mb-6">
-            <CropBidding />
-          </div>
+          {activeTab === 'dashboard' && (
+            <div className="mb-6">
+              <CropBidding />
+            </div>
+          )}
+          {activeTab === 'market-predictor' && (
+            <MarketPredictor />
+          )}
         </main>
       </div>
     </div>

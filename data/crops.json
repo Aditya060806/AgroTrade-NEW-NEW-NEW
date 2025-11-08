@@ -1,27 +1,3 @@
 [
-  {
-    "id": "crop_1762618989006_tjqgwkmsn",
-    "cropName": "wheat",
-    "quantity": 12,
-    "minPrice": 15,
-    "currentPrice": 20,
-    "location": "mohali",
-    "farmerId": "FARMER001",
-    "farmerName": "Unknown Farmer",
-    "status": "closed",
-    "bids": [
-      {
-        "id": "bid_1762619006650_mulkc2cks",
-        "traderId": "FARMER001",
-        "traderName": "Unknown Trader",
-        "amount": 20,
-        "timestamp": "2025-11-08T16:23:26.650Z"
-      }
-    ],
-    "createdAt": "2025-11-08T16:23:09.006Z",
-    "highestBidder": {
-      "traderId": "FARMER001",
-      "traderName": "Unknown Trader"
-    }
-  }
+  
 ]
