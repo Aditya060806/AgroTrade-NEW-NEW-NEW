@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Camera, TrendingUp, Sprout, BookOpen, Mic } from 'lucide-react';
+import { Home, Camera, TrendingUp, Sprout, BookOpen, Mic, DollarSign } from 'lucide-react';
 import Sidebar from '../shared/Sidebar';
 import Navbar from '../shared/Navbar';
 
@@ -73,6 +73,7 @@ const FarmerDashboard = () => {
 
   const sidebarItems = [
     { icon: Home, label: t('dashboard'), active: selectedFeature === null, onClick: () => setSelectedFeature(null) },
+    { icon: DollarSign, label: t('earnings'), active: selectedFeature === 'earnings', onClick: () => setSelectedFeature('earnings') },
     { icon: Camera, label: t('diseasePredictor'), active: selectedFeature === 'disease-predictor', onClick: () => setSelectedFeature('disease-predictor') },
     { icon: TrendingUp, label: t('marketPredictor'), active: selectedFeature === 'market-predictor', onClick: () => setSelectedFeature('market-predictor') },
     { icon: Sprout, label: t('cropRecommendation'), active: selectedFeature === 'crop-recommendation', onClick: () => setSelectedFeature('crop-recommendation') },
@@ -86,6 +87,49 @@ const FarmerDashboard = () => {
 
 
 
+  if (selectedFeature === 'earnings') {
+    const wonAuctions = allCrops.filter(crop => crop.status === 'closed' && crop.highestBidder);
+    
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Sidebar role="farmer" items={sidebarItems} />
+        <div className="ml-64">
+          <Navbar />
+          <main className="p-8">
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h2 className="text-2xl font-semibold mb-6">{t('earnings')}</h2>
+              {wonAuctions.length === 0 ? (
+                <p className="text-gray-500">No completed auctions yet.</p>
+              ) : (
+                <div className="space-y-4">
+                  {wonAuctions.map(crop => (
+                    <div key={crop.id} className="p-4 border rounded-lg">
+                      <div className="flex justify-between items-start mb-3">
+                        <div>
+                          <div className="font-semibold text-lg">{crop.cropName}</div>
+                          <div className="text-sm text-gray-600">{crop.quantity}kg × ₹{crop.currentPrice}/kg</div>
+                          <div className="text-sm text-gray-600">Buyer: {crop.highestBidder.traderName}</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-lg font-bold text-green-600">₹{crop.currentPrice * crop.quantity}</div>
+                          <span className={`px-2 py-1 rounded text-xs font-medium ${
+                            crop.paymentStatus === 'completed' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                          }`}>
+                            {crop.paymentStatus === 'completed' ? 'Completed' : 'Pending'}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </main>
+        </div>
+      </div>
+    );
+  }
+  
   if (selectedFeature) {
     return (
       <FeaturePage 
