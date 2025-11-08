@@ -33,30 +33,37 @@ const Sidebar = ({ role, items }) => {
       {items.map((item, idx) => (
         <button
           key={idx}
-          className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 transition-colors ${
+          onClick={item.onClick}
+          className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg mb-2 border transition-colors ${
             item.active
-              ? 'bg-yellow-400 text-gray-900'
-              : 'text-gray-600 hover:bg-gray-100'
+              ? 'bg-yellow-400 text-gray-900 border-yellow-500'
+              : 'text-gray-600 hover:bg-gray-100 border-gray-200 hover:border-gray-300'
           }`}
         >
-          <item.icon className="w-5 h-5" />
-          <span className="font-medium">{item.label}</span>
+          <div className="w-5 flex justify-center">
+            <item.icon className="w-5 h-5" />
+          </div>
+          <span className="font-medium truncate">{item.label}</span>
         </button>
       ))}
     </nav>
 
     {/* Bottom actions */}
     <div className="p-4 border-t border-gray-200">
-      <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100 mb-2">
-        <Settings className="w-5 h-5" />
-        <span className="font-medium">Settings</span>
+      <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-100 mb-2 border border-gray-200 hover:border-gray-300">
+        <div className="w-5 flex justify-center">
+          <Settings className="w-5 h-5" />
+        </div>
+        <span className="font-medium truncate">Settings</span>
       </button>
       <button 
         onClick={handleLogout}
-        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50"
+        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-600 hover:bg-red-50 border border-gray-200 hover:border-red-200"
       >
-        <LogOut className="w-5 h-5" />
-        <span className="font-medium">Logout</span>
+        <div className="w-5 flex justify-center">
+          <LogOut className="w-5 h-5" />
+        </div>
+        <span className="font-medium truncate">Logout</span>
       </button>
     </div>
   </div>

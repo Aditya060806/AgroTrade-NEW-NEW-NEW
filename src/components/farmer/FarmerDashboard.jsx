@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Sprout, Gavel, Truck, DollarSign, Star } from 'lucide-react';
+import { Home, Camera, TrendingUp, Sprout, BookOpen, Mic } from 'lucide-react';
 import Sidebar from '../shared/Sidebar';
 import Navbar from '../shared/Navbar';
 
@@ -72,12 +72,12 @@ const FarmerDashboard = () => {
   }, []);
 
   const sidebarItems = [
-    { icon: Home, label: t('dashboard'), active: true },
-    { icon: Sprout, label: t('myCrops'), active: false },
-    { icon: Gavel, label: t('myAuctions'), active: false },
-    { icon: Truck, label: t('deliveryProgress'), active: false },
-    { icon: DollarSign, label: t('earnings'), active: false },
-    { icon: Star, label: t('ratings'), active: false },
+    { icon: Home, label: t('dashboard'), active: selectedFeature === null, onClick: () => setSelectedFeature(null) },
+    { icon: Camera, label: t('diseasePredictor'), active: selectedFeature === 'disease-predictor', onClick: () => setSelectedFeature('disease-predictor') },
+    { icon: TrendingUp, label: t('marketPredictor'), active: selectedFeature === 'market-predictor', onClick: () => setSelectedFeature('market-predictor') },
+    { icon: Sprout, label: t('cropRecommendation'), active: selectedFeature === 'crop-recommendation', onClick: () => setSelectedFeature('crop-recommendation') },
+    { icon: BookOpen, label: t('cropGuide'), active: selectedFeature === 'crop-guide', onClick: () => setSelectedFeature('crop-guide') },
+    { icon: Mic, label: t('voiceVisionAssistant'), active: selectedFeature === 'voice-vision-assistant', onClick: () => setSelectedFeature('voice-vision-assistant') },
   ];
 
 
